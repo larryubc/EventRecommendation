@@ -81,9 +81,7 @@ public class Item {
             return this;
         }
 
-        public double getDistance() {
-            return distance;
-        }
+
 
         public void setDistance(double distance) {
             this.distance = distance;
@@ -159,7 +157,9 @@ public class Item {
         }
     }
 
-
+    public double getDistance() {
+        return distance;
+    }
 
     public String getItemId() {
         return itemId;

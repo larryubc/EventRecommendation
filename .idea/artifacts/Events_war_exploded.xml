@@ -7,9 +7,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Events" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="java-json" />
-        </element>
+        <element id="directory" name="lib" />
       </element>
     </root>
   </artifact>
