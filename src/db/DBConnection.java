@@ -1,9 +1,9 @@
 package db;
 
-        import java.util.List;
-        import java.util.Set;
-
         import entity.Item;
+
+import java.util.List;
+import java.util.Set;
 
 public interface DBConnection {
     /**
@@ -86,5 +86,9 @@ public interface DBConnection {
  * @param password
  * @return boolean
  */
-public boolean verifyLogin(String userId, String password);
+    public boolean verifyLogin(String userId, String password);
+
+    public boolean register(String userId, String password, String firstname, String lastname);
+
+
 }

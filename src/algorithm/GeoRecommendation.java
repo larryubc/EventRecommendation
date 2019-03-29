@@ -1,9 +1,9 @@
 package algorithm;
 
 import db.DBConnection;
+import db.DBConnectionFactory;
 import entity.Item;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 public class GeoRecommendation {
@@ -12,6 +12,7 @@ public class GeoRecommendation {
         List<Item> recommendeItems = new ArrayList<>();
         DBConnection conn = DBConnectionFactory.getDBConnection();
         Set<String> favoriteItemIds = conn.getFavoriteItemIds(userId);
+        System.out.println(favoriteItemIds.size());
         Map<String,Integer> allCategories = new HashMap<>();
 
 
@@ -22,6 +23,7 @@ public class GeoRecommendation {
             }
         }
 
+
         List<Map.Entry<String,Integer>> categoryList = new ArrayList<Map.Entry<String,Integer>>(allCategories.entrySet());
 
         Collections.sort(categoryList, new Comparator<Map.Entry<String, Integer>>() {
@@ -31,6 +33,8 @@ public class GeoRecommendation {
             }
         });
 
+        System.out.println("catagretlist has size of " + categoryList.size());
+
 
         Set<Item> visitedItems = new HashSet<>();
 
@@ -39,7 +43,7 @@ public class GeoRecommendation {
             List<Item> filteredItems = new ArrayList<>();
 
             for(Item item : items) {
-                if (favoriteItemIds.contains(item.getItemId()) && !visitedItems.contains(item)) {
+                if (!favoriteItemIds.contains(item.getItemId()) && !visitedItems.contains(item)) {
                     filteredItems.add(item);
 
                 }
@@ -48,7 +52,12 @@ public class GeoRecommendation {
             Collections.sort(filteredItems, new Comparator<Item>() {
                 @Override
                 public int compare(Item item1, Item item2) {
-                    return Double.compare(item1.getDistance(),item2.getDistance());
+                    double distance1 = getDistance(item1.getLatitude(), item1.getLongitude(), lat, lon);
+                    double distance2 = getDistance(item2.getLatitude(), item2.getLongitude(), lat, lon);
+                    if (distance1 == distance2) {
+                        return 0;
+                    }
+                    return distance1 < distance2 ? -1 : 1;
                 }
             });
 
@@ -58,5 +67,18 @@ public class GeoRecommendation {
 
         return recommendeItems;
 
+    }
+
+
+    private static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+        double a = Math.sin(dlat / 2 / 180 * Math.PI) * Math.sin(dlat / 2 / 180 * Math.PI)
+                + Math.cos(lat1 / 180 * Math.PI) * Math.cos(lat2 / 180 * Math.PI) * Math.sin(dlon / 2 / 180 * Math.PI)
+                * Math.sin(dlon / 2 / 180 * Math.PI);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        // Radius of earth in miles.
+        double R = 3961;
+        return R * c;
     }
 }

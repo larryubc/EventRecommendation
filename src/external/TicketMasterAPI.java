@@ -1,9 +1,9 @@
 package external;
 
+import org.json.JSONException;
 import entity.Item;
 import entity.Item.ItemBuilder;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
