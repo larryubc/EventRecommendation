@@ -27,10 +27,10 @@ public class TicketMasterAPI {
 
 
         String url =  "http://" + API_HOST + SEARCH_PATH;
-        String geoHash = GeoHash.encodeGeohash(lat,lon,4);
+        String geoHash = GeoHash.encodeGeohash(lat,lon,3);
         term = (term == null ? DEFAULT_TERM : term);
         term = urlEncodeHelper(term);
-        String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=50", API_KEY, geoHash, term);
+        String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=150", API_KEY, geoHash, term);
 
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url + "?" + query).openConnection();
@@ -199,11 +199,7 @@ public class TicketMasterAPI {
 
     public static void main(String[] args) {
         TicketMasterAPI tmApi = new TicketMasterAPI();
-        // Mountain View, CA
-        // tmApi.queryAPI(37.38, -122.08);
-        // London, UK
-        // tmApi.queryAPI(51.503364, -0.12);
-        // Houston, TX
+
         tmApi.queryAPI(39.682684, -95.295410);
     }
 

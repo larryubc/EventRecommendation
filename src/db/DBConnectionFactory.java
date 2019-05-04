@@ -13,7 +13,7 @@ public class DBConnectionFactory {
                 return new MySQLConnection(); // singleton pattern
             case "mongodb":
                 return null;
-            // You may try other dbs and add them here.
+
             default:
                 throw new IllegalArgumentException("Invalid db " + db);
         }

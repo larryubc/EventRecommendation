@@ -496,10 +496,15 @@
     function listItems(items) {
         // Clear the current results
         var itemList = $('item-list');
+
         itemList.innerHTML = '';
 
+
+
         for (var i = 0; i < items.length; i++) {
-            addItem(itemList, items[i]);
+
+            var category = items[i].categories[0];
+                addItem(itemList, items[i]);
         }
     }
 

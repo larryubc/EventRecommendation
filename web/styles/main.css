@@ -6,7 +6,7 @@
 
 body {
 	background: #999999; /* #434343 */
-	color: #FFFFFF;
+	/*color: #FFFFFF;*/
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: 0.9em;
@@ -102,7 +102,7 @@ ul {
 }
 
 .container>header span {
-	color: #CC94; /* #FBAF41 */ /* rgba(253, 200, 60, 1) */
+	color: GRAY; /* #FBAF41 */ /* rgba(253, 200, 60, 1) */
 	font-size: 1.4em;
 	text-shadow: 0 0 0.03em #FFFFFF, -0 -0 0.03em #FFFFFF;
 }
@@ -114,7 +114,7 @@ ul {
 }
 
 .main-section {
-	background: #66CCCC; /* #F3BB43 */
+	background: #66CC; /* #F3BB43 */
 }
 
 .nav-icon {
@@ -242,7 +242,7 @@ ul {
 
 /*** footer ***/
 footer {
-	background: #999999;
+	background: gainsboro;
 	font-size: 1em;
 	height: 200px;
 	position: relative;
